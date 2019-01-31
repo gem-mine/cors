@@ -12,10 +12,10 @@ export enum METHOD {
 export type CROSS_ORIGIN = boolean | ((string | RegExp)[])
 
 export interface OPTIONS {
-  /** CORS 跨域请求支持，配置可以是：
+  /**
+   * CORS 跨域请求支持，配置可以是：
    * boolean: true 表示支持任意域的请求；
    * array: 支持多域白名单配置，其中元素可以是 域名字符串、正则表达式。
-   * 中间件所在位置：app/middleware/cors.ts
    */
   origins: CROSS_ORIGIN
   /**
