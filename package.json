@@ -1,0 +1,32 @@
+{
+  "name": "@gem-mine/cors",
+  "version": "0.1.0",
+  "description": "cors for koa, support multiple domains setting",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "cors",
+    "koa",
+    "multiple",
+    "typescript"
+  ],
+  "author": "caolvchong@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/koa": "^2.0.48",
+    "@types/node": "^10.12.19",
+    "koa": "^2.7.0",
+    "ts-node": "^8.0.2",
+    "tslib": "^1.9.3",
+    "tslint": "^5.12.1",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.2.4"
+  }
+}
