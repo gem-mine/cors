@@ -33,5 +33,5 @@ app.use(cors({
 ```
 
 针对 origins 的取值：
-* true: 对所有域生效
-* ['http://baidu.com', /google\.com$/]: 支持字符串或正则表达式
+* `true`: 对所有域生效
+* `['http://baidu.com', /google\.com$/]`: 支持字符串或正则表达式
