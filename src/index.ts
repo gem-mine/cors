@@ -52,12 +52,12 @@ function cors(
     }
   }
 
-  return function(ctx: Koa.Context, next: () => Promise<any>): any {
+  return async function(ctx: Koa.Context, next: () => Promise<any>) {
     const origin = <string>ctx.req.headers.origin
     ctx.vary('Origin') // https://github.com/rs/cors/issues/10
 
     if (!origin) {
-      return next()
+      return await next()
     }
 
     let match: boolean
@@ -88,19 +88,22 @@ function cors(
         maxAge = 3600
       } = options
       const sendCookie = credentials === false ? 'false' : 'true'
-      ctx.set('Access-Control-Allow-Credentials', sendCookie)
-      ctx.set('Access-Control-Allow-Origin', origin)
 
       if (ctx.method === 'OPTIONS') {
         // this not preflight request, ignore it
         if (!ctx.get('Access-Control-Request-Method')) {
-          return next()
+          return await next()
         }
         ctx.set('Access-Control-Allow-Methods', methods.join(','))
         ctx.set('Access-Control-Max-Age', maxAge + '')
+
+        ctx.status = 204
       }
+
+      ctx.set('Access-Control-Allow-Credentials', sendCookie)
+      ctx.set('Access-Control-Allow-Origin', origin)
     }
-    return next()
+    await next()
   }
 }
 
