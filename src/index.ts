@@ -32,9 +32,7 @@ export interface OPTIONS {
   maxAge?: number
 }
 
-function cors(
-  options: OPTIONS
-): (context: Koa.Context, next: () => Promise<any>) => void {
+function cors(options: OPTIONS): (context: Koa.Context, next: () => Promise<any>) => void {
   const { origins } = options
   // 缓存处理，避免每次请求都重新计算
   const _isArray = Array.isArray(origins)
@@ -75,18 +73,7 @@ function cors(
     }
 
     if (match) {
-      const {
-        methods = [
-          METHOD.GET,
-          METHOD.HEAD,
-          METHOD.PUT,
-          METHOD.POST,
-          METHOD.DELETE,
-          METHOD.PATCH
-        ],
-        credentials,
-        maxAge = 3600
-      } = options
+      const { methods = [METHOD.GET, METHOD.HEAD, METHOD.PUT, METHOD.POST, METHOD.DELETE, METHOD.PATCH], credentials, maxAge = 3600 } = options
       const sendCookie = credentials === false ? 'false' : 'true'
 
       if (ctx.method === 'OPTIONS') {
