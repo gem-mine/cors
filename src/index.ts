@@ -87,14 +87,12 @@ function cors(options: OPTIONS): (context: Koa.Context, next: () => Promise<any>
         }
         ctx.set('Access-Control-Allow-Methods', methods.join(','))
         ctx.set('Access-Control-Max-Age', maxAge + '')
-
+        if (allowHeaders) {
+          ctx.set('Access-Control-Allow-Headers', allowHeaders.join(','));
+        } else {
+          ctx.set('Access-Control-Allow-Headers', ctx.get('Access-Control-Request-Headers'));
+        }
         ctx.status = 204
-      }
-
-      if (allowHeaders) {
-        ctx.set('Access-Control-Allow-Headers', allowHeaders.join(','));
-      } else {
-        ctx.set('Access-Control-Allow-Headers', ctx.get('Access-Control-Request-Headers'));
       }
 
       ctx.set('Access-Control-Allow-Credentials', sendCookie)
