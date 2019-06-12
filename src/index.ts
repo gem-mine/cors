@@ -30,6 +30,10 @@ export interface OPTIONS {
    * 设置缓存，单位秒，缓存生效期内不会再次发送 OPTIONS 请求，默认 3600 秒
    */
   maxAge?: number
+  /**
+   * 支持的请求头
+   */
+  allowHeaders?: Array<string>
 }
 
 function cors(options: OPTIONS): (context: Koa.Context, next: () => Promise<any>) => void {
@@ -73,7 +77,7 @@ function cors(options: OPTIONS): (context: Koa.Context, next: () => Promise<any>
     }
 
     if (match) {
-      const { methods = [METHOD.GET, METHOD.HEAD, METHOD.PUT, METHOD.POST, METHOD.DELETE, METHOD.PATCH], credentials, maxAge = 3600 } = options
+      const { methods = [METHOD.GET, METHOD.HEAD, METHOD.PUT, METHOD.POST, METHOD.DELETE, METHOD.PATCH], credentials, maxAge = 3600, allowHeaders } = options
       const sendCookie = credentials === false ? 'false' : 'true'
 
       if (ctx.method === 'OPTIONS') {
@@ -85,6 +89,12 @@ function cors(options: OPTIONS): (context: Koa.Context, next: () => Promise<any>
         ctx.set('Access-Control-Max-Age', maxAge + '')
 
         ctx.status = 204
+      }
+
+      if (allowHeaders) {
+        ctx.set('Access-Control-Allow-Headers', allowHeaders.join(','));
+      } else {
+        ctx.set('Access-Control-Allow-Headers', ctx.get('Access-Control-Request-Headers'));
       }
 
       ctx.set('Access-Control-Allow-Credentials', sendCookie)
