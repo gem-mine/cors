@@ -5,7 +5,7 @@ export enum METHOD {
   HEAD = 'HEAD',
   PUT = 'PUT',
   POST = 'POST',
-  DELETE = 'DELETE ',
+  DELETE = 'DELETE',
   PATCH = 'PATCH'
 }
 
