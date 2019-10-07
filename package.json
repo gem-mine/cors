@@ -21,7 +21,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/koa": "^2.0.48",
-    "@types/node": "^10.12.19",
+    "@types/node": "^12.7.11",
     "koa": "^2.7.0",
     "ts-node": "^8.0.2",
     "tslib": "^1.9.3",
